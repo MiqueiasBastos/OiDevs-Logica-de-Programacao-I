@@ -78,5 +78,62 @@ const upDateTask = (index) =>{
    
 }
 
+function getTask(index) {
+    return taskList[index];
+}
+
+const taskModalElement = document.getElementById("task-modal");
+const taskModal = new bootstrap.Modal(taskModalElement, {});
+
+taskModalElement.addEventListener("show.bs.modal", (event) => {
+    const button = event.relatedTarget;
+    const action = button.getAttribute("data-bs-action");
+    const indexTask = button.getAttribute("data-bs-index");
+
+    const modalTitle = taskModalElement.querySelector(".modal-title");
+    const btnSave = taskModalElement.querySelector("#btn-save");
+
+    modalTitle.textContent = action === "add" ? "Nova Tarefa" : "Editar Tarefa";
+    
+    let inputTitle = document.getElementById("input-title");
+    let inputCat = document.getElementById("input-category");
+    let inputHour = document.getElementById("input-hour");
+
+    switch (action) {
+        case "add":
+            inputTitle.value = "";
+            inputCat.value = "";
+            inputHour.value = "";
+            break;
+        case "edit":
+            let taskEdit = getTask(indexTask);
+            inputTitle.value = taskEdit.title;
+            inputCat.value = taskEdit.category;
+            inputHour.value = taskEdit.hour;
+            break;
+        default:
+            break;
+    }
+
+    btnSave.onclick = () => {
+        if (inputTitle.value === "" || inputCat.value === "" || inputHour.value === "") {
+            alert("Por favor, Preencha todos os campos");
+            return;
+        }
+        switch (action) {
+            case "add":
+                createTask();
+                break;
+            case "edit":
+                upDateTask(indexTask);
+                break;
+            default:
+                break;
+        }
+        renderList();
+        taskModal.hide(taskModalElement);
+    };
+});
+
 renderList(); // Renderizando a lista de tarefas na tela
 
