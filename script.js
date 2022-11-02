@@ -5,9 +5,9 @@ const taskList = [
     { title: 'fazer suco', category: 'cozinha', hour: '12:00', completed: false },
 ]
 
-const renderList = ()=>{
+const renderList = () => {
     let liContent = '';
-    taskList.forEach(({title,category,hour,completed}, index)=>{
+    taskList.forEach(({ title, category, hour, completed }, index) => {
         liContent += `
         <li class="list-group-item d-flex justify-content-between align-items-center mb-3 rounded border ps-0">
                 <button type="button" class="btn btn-link p-2">
@@ -27,7 +27,7 @@ const renderList = ()=>{
                     <button type="button" class="btn btn-dark px-2 py-1" data-bs-toggle="modal" data-bs-target="#task-modal" data-bs-action="edit" data-bs-index="${index}">
                         <i class="bi bi-pencil-fill"></i>
                     </button>
-                    <button type="button" class="btn btn-outline-dark px-2 py-1">
+                    <button type="button" class="btn btn-outline-dark px-2 py-1" onclick="deleteTask(${index})">
                         <i class="bi bi-trash-fill"></i>
                     </button>
                 </div>
@@ -35,14 +35,14 @@ const renderList = ()=>{
         `
     })
 
-    if(taskList.length === 0){
+    if (taskList.length === 0) {
         liContent += `
         <div class="alert alert-dark text-center" role="alert">
             Ainda não há tarefas para este dia
         </div>
         `
     }
-    
+
     var listaDeTarefas = document.querySelector("#list-tasks");
     listaDeTarefas.innerHTML = liContent;
 
@@ -57,6 +57,12 @@ const createTask = () => {
         category: inputCat,
         hour: inputHour,
         completed: false
-    })    
+    })
 }
 
+const deleteTask = (index) => {
+    taskList.splice(index, 1);
+    renderList();
+}
+
+renderList(); // Renderizando a lista de tarefas na tela
