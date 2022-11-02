@@ -46,5 +46,17 @@ const renderList = ()=>{
     var listaDeTarefas = document.querySelector("#list-tasks");
     listaDeTarefas.innerHTML = liContent;
 
-
 }
+
+const createTask = () => {
+    let inputTitle = document.getElementById("input-title").value;
+    let inputCat = document.getElementById("input-category").value;
+    let inputHour = document.getElementById("input-hour").value;
+    taskList.push({
+        title: inputTitle,
+        category: inputCat,
+        hour: inputHour,
+        completed: false
+    })    
+}
+
