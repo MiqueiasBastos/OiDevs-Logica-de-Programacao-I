@@ -1,9 +1,14 @@
+//listas simulando BD mocado
 const taskList = [
-    { title: 'fazer pão', category: 'cozinha', hour: '12:00', completed: true },
-    { title: 'fazer café', category: 'cozinha', hour: '12:00', completed: false },
-    { title: 'fazer chá', category: 'cozinha', hour: '12:00', completed: false },
-    { title: 'fazer suco', category: 'cozinha', hour: '12:00', completed: false },
-]
+    // { title: 'fazer pão', category: 'cozinha', hour: '12:00', completed: true },
+    // { title: 'fazer café', category: 'cozinha', hour: '12:00', completed: false },
+    // { title: 'fazer chá', category: 'cozinha', hour: '12:00', completed: false },
+    // { title: 'fazer suco', category: 'cozinha', hour: '12:00', completed: false },
+];
+
+const days = ["Domingo", "Segunda-feira", "Terça-feira", "Quarta-feira", "Quinta-feira", "Sexta-feira", "Sábado"];
+
+const months = ["janeiro", "fevereiro", "março", "abril", "maio", "junho", "julho", "agosto", "setembro", "outubro", "novembro", "dezembro"];
 
 const renderList = () => {
     let liContent = '';
@@ -139,6 +144,22 @@ taskModalElement.addEventListener("show.bs.modal", (event) => {
         taskModal.hide(taskModalElement);
     };
 });
+
+const hourArea = document.querySelector("#hour");
+const dateArea = document.querySelector("#date");
+
+setInterval(()=>{
+    const newDate = new Date();
+    let hour = newDate.getHours();
+    let min = newDate.getMinutes();
+    let day = newDate.getDay(); //retorna o dia da semana em número
+    let date = newDate.getDate(); //retorna o dia
+    let month = newDate.getMonth();
+
+    hourArea.innerHTML = `${hour.toString().padStart(2, '0')}:${min.toString().padStart(2,'0')}` //02:45
+    dateArea.innerHTML = `${days[day]}, ${date} de ${months[month]}` //domingo, 14 de janeiro
+    
+}, 1000)
 
 renderList(); // Renderizando a lista de tarefas na tela
 
