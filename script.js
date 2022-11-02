@@ -148,7 +148,7 @@ taskModalElement.addEventListener("show.bs.modal", (event) => {
 const hourArea = document.querySelector("#hour");
 const dateArea = document.querySelector("#date");
 
-setInterval(()=>{
+const renderDate = () => {
     const newDate = new Date();
     let hour = newDate.getHours();
     let min = newDate.getMinutes();
@@ -158,8 +158,10 @@ setInterval(()=>{
 
     hourArea.innerHTML = `${hour.toString().padStart(2, '0')}:${min.toString().padStart(2,'0')}` //02:45
     dateArea.innerHTML = `${days[day]}, ${date} de ${months[month]}` //domingo, 14 de janeiro
-    
-}, 1000)
+}
 
+setInterval(renderDate, 1000);
+
+renderDate();
 renderList(); // Renderizando a lista de tarefas na tela
 
