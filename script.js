@@ -10,7 +10,7 @@ const renderList = () => {
     taskList.forEach(({ title, category, hour, completed }, index) => {
         liContent += `
         <li class="list-group-item d-flex justify-content-between align-items-center mb-3 rounded border ps-0">
-                <button type="button" class="btn btn-link p-2">
+                <button type="button" class="btn btn-link p-2" onclick="toggleStatus(${index})">
                     <i class="bi ${completed ? 'bi-check-circle-fill' : 'bi-circle'} fs-4 text-dark"></i>
                 </button>
                 <div class="me-auto">
@@ -78,8 +78,13 @@ const upDateTask = (index) =>{
    
 }
 
-function getTask(index) {
+const getTask = (index)  => {
     return taskList[index];
+}
+
+const toggleStatus = (index) => {
+    taskList[index].completed = !taskList[index].completed;
+    renderList();
 }
 
 const taskModalElement = document.getElementById("task-modal");
