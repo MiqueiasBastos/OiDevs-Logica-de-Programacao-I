@@ -65,4 +65,18 @@ const deleteTask = (index) => {
     renderList();
 }
 
+const upDateTask = (index) =>{
+    let inputTitle = document.getElementById("input-title").value;
+    let inputCat = document.getElementById("input-category").value;
+    let inputHour = document.getElementById("input-hour").value;
+
+    taskList[index] = {
+        title: inputTitle,
+        category: inputCat,
+        hour: inputHour
+    }
+   
+}
+
 renderList(); // Renderizando a lista de tarefas na tela
+
