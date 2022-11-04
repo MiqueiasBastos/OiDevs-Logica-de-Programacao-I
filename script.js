@@ -1,14 +1,15 @@
 //listas simulando BD mocado
 const taskList = [
-    // { title: 'fazer pão', category: 'cozinha', hour: '12:00', completed: true },
-    // { title: 'fazer café', category: 'cozinha', hour: '12:00', completed: false },
-    // { title: 'fazer chá', category: 'cozinha', hour: '12:00', completed: false },
-    // { title: 'fazer suco', category: 'cozinha', hour: '12:00', completed: false },
+    { title: 'reunião de grupo', category: 'estudo', hour: '10:00', completed: true },
+    { title: 'codar projeto', category: 'trabalho', hour: '13:30', completed: true },
+    { title: 'entregar projeto', category: 'estudo', hour: '19:00', completed: true },
+    { title: 'apresentar projeto', category: 'estudo', hour: '20:00', completed: false },
 ];
 
 const days = ["Domingo", "Segunda-feira", "Terça-feira", "Quarta-feira", "Quinta-feira", "Sexta-feira", "Sábado"];
 
 const months = ["janeiro", "fevereiro", "março", "abril", "maio", "junho", "julho", "agosto", "setembro", "outubro", "novembro", "dezembro"];
+
 
 const renderList = () => {
     let liContent = '';
@@ -65,10 +66,12 @@ const createTask = () => {
     })
 }
 
+
 const deleteTask = (index) => {
     taskList.splice(index, 1);
     renderList();
 }
+
 
 const upDateTask = (index) =>{
     let inputTitle = document.getElementById("input-title").value;
@@ -80,17 +83,13 @@ const upDateTask = (index) =>{
         category: inputCat,
         hour: inputHour
     }
-   
-}
-
-const getTask = (index)  => {
-    return taskList[index];
 }
 
 const toggleStatus = (index) => {
     taskList[index].completed = !taskList[index].completed;
     renderList();
 }
+
 
 const taskModalElement = document.getElementById("task-modal");
 const taskModal = new bootstrap.Modal(taskModalElement, {});
@@ -116,7 +115,7 @@ taskModalElement.addEventListener("show.bs.modal", (event) => {
             inputHour.value = "";
             break;
         case "edit":
-            let taskEdit = getTask(indexTask);
+            let taskEdit = taskList[indexTask];
             inputTitle.value = taskEdit.title;
             inputCat.value = taskEdit.category;
             inputHour.value = taskEdit.hour;
@@ -144,6 +143,7 @@ taskModalElement.addEventListener("show.bs.modal", (event) => {
         taskModal.hide(taskModalElement);
     };
 });
+
 
 const hourArea = document.querySelector("#hour");
 const dateArea = document.querySelector("#date");
